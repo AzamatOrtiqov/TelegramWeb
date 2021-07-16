@@ -1,4 +1,4 @@
-let selected = 0;
+let n = 0;
 
 let localStorageData = localStorage.getItem("data")
 
@@ -270,14 +270,14 @@ const nameDateImgWrapperElement = document.querySelector(".name_date_img_wrapper
 peopleItem.forEach( (element , index)=> {
     element.addEventListener("click" , event=>{
         event.preventDefault();
-        selected=index;
-        peopleImg.src = data[selected]["img"];
-        peopleName.textContent = data[selected]["name"];
-        peopleProfilImgElement.src = data[selected]["img"];
-        peopleProfilPictureNameElement.textContent = data[selected]["name"];
-        peopleNumberElement.textContent = data[selected]["phone"];
-        peopleBioElement.textContent = data[selected]["bio"];
-        peopleUsernameElement.textContent = data[selected]["username"];
+        n=index;
+        peopleImg.src = data[n]["img"];
+        peopleName.textContent = data[n]["name"];
+        peopleProfilImgElement.src = data[n]["img"];
+        peopleProfilPictureNameElement.textContent = data[n]["name"];
+        peopleNumberElement.textContent = data[n]["phone"];
+        peopleBioElement.textContent = data[n]["bio"];
+        peopleUsernameElement.textContent = data[n]["username"];
 
         usersInfoHeaderElement.classList.remove("d-none");
         usersInfoMainElement.classList.remove("d-none");
@@ -293,7 +293,7 @@ peopleItem.forEach( (element , index)=> {
             })
         })
 
-        renderSelectedChatMessages()
+        renderChatMessages()
     }) 
 })
 
@@ -334,9 +334,9 @@ function messageRender(text , time , sender){
     }
 }
 
-function renderSelectedChatMessages(){
+function renderChatMessages(){
     userInfoMainListElement.innerHTML = "";
-    for (let message of data[selected].chatMessage) {
+    for (let message of data[n].chatMessage) {
         userInfoMainListElement.appendChild(messageRender(message.message , message.messageSendedTime , message.sender));
     }
 }
@@ -351,7 +351,7 @@ usersInfoFooterFormElement.addEventListener("submit" , event => {
     let hour = date.getHours();
     let minut = date.getMinutes();
 
-    data[selected]["chatMessage"].push({
+    data[n]["chatMessage"].push({
         sender: "Azamat",
         message: footerFormInputElement.value,
         messageSendedTime: hour + ":" + minut
